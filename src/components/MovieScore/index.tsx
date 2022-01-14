@@ -2,16 +2,21 @@ import React from 'react';
 import MovieStars from "../MovieStars"
 import './styles.css'
 
-function MovieScore(){
+type Props = {
+    score : number,
+    count : number
+}
 
-    const score = 3.5;
-    const count = 13
+function MovieScore({score, count} : Props){
+
+    const scores = .5;
+    const counts = 13
 
     return(
         <div className="dsmovie-score-container">
-            <p className="dsmovie-score-value">{score > 0 ? score.toFixed(1) : '-'}</p>
-            <MovieStars/>
-            <p className="dsmovie-score-count">{count} avaliações</p>
+            <p className="dsmovie-score-value">{scores > 0 ? scores.toFixed(1) : '-'}</p>
+            <MovieStars score={scores}/>
+            <p className="dsmovie-score-count">{counts} avaliações</p>
         </div>
     )
 }
