@@ -8,6 +8,7 @@ import { BASE_URL } from '../../utils/requests';
 function Listing(){
 
     const [pageNumber, setPageNumber] = useState(0);
+    const [movie, setMovie] = useState([]);
     const [page, setPage] = useState<MoviePage>({
         content: [],
         last: true,
@@ -21,24 +22,25 @@ function Listing(){
         }
     )
 
-    const movie = {
+    /*const movie = {
         id: 1,
         image: "https://www.themoviedb.org/t/p/w533_and_h300_bestv2/jBJWaqoSCiARWtfV0GlqHrcdidd.jpg",
         title: "The Witcher",
         count: 2,
         score: 4.5
-    };
+    };*/
     
     function listPage(){
         axios.get(`${BASE_URL}/movies?size=12&page=${pageNumber}`).then(response => {
-            const data = response.data.content;
+            const data = response.data;
             setPage(data);
+            setMovie(data)
         })
     }
 
     useEffect(() => {
         listPage()
-        console.log(page)
+        console.log(movie)
     },[pageNumber])
 
     const handlePageChange = (newNumber: number) => {
@@ -48,12 +50,15 @@ function Listing(){
         <>
             <Pagination page={page} onChange={handlePageChange}/>
             <div className="row m-1">
-                {//page.content.map(movie => {
-                    <div key={movie.id} className="col-sm-6 col-lg-4 col-xl-3 mb-4">
-                        <p>{movie.title}</p>
-                        <MovieCard movie={movie}/>
+                {/*page.content.map(movie => {
+                    <div /*key={//movie.id} className="col-sm-6 col-lg-4 col-xl-3 mb-4">
+                        <p>
+                            {//movie.title}
+                            </p>
+                        <MovieCard movie={'ccc'}
+                        />
                     </div>
-                    //})
+                    //})*/
                 }
             </div>
         </>
